@@ -146,30 +146,30 @@ val LocalCustomColors = staticCompositionLocalOf { CustomColors() }
 
 val lightCustomColors =
   CustomColors(
-    appTitleGradientColors = listOf(Color(0xFF85B1F8), Color(0xFF3174F1)),
-    tabHeaderBgColor = Color(0xFF3174F1),
+    appTitleGradientColors = listOf(Color(0xFF312E81), Color(0xFF1E1B4B)),
+    tabHeaderBgColor = Color(0xFF1E1B4B),
     taskCardBgColor = surfaceContainerLowestLight,
     taskBgColors =
       listOf(
-        // red
-        Color(0xFFFFF5F5),
+        // indigo
+        Color(0xFFF0EFF8),
         // green
         Color(0xFFF4FBF6),
-        // blue
-        Color(0xFFF1F6FE),
-        // yellow
-        Color(0xFFFFFBF0),
+        // gold
+        Color(0xFFFFF8E8),
+        // parchment
+        Color(0xFFF7F6F1),
       ),
     taskBgGradientColors =
       listOf(
-        // red
-        listOf(Color(0xFFE25F57), Color(0xFFDB372D)),
+        // indigo
+        listOf(Color(0xFF312E81), Color(0xFF1E1B4B)),
         // green
-        listOf(Color(0xFF41A15F), Color(0xFF128937)),
-        // blue
-        listOf(Color(0xFF669DF6), Color(0xFF3174F1)),
-        // yellow
-        listOf(Color(0xFFFDD45D), Color(0xFFCAA12A)),
+        listOf(Color(0xFF22C55E), Color(0xFF16A34A)),
+        // gold
+        listOf(Color(0xFFF5A623), Color(0xFFD4880C)),
+        // parchment
+        listOf(Color(0xFFE8E7E0), Color(0xFFD5D4CD)),
       ),
     taskIconColors =
       listOf(
