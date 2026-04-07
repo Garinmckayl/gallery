@@ -86,6 +86,7 @@ private const val TEST_MODEL_ALLOW_LIST = """
       "name": "Ivy Model 1.7B (Bonsai 1-bit)",
       "modelId": "prism-ml/Bonsai-1.7B-gguf",
       "modelFile": "Bonsai-1.7B.gguf",
+      "commitHash": "main",
       "description": "PrismML Bonsai 1.7B with true 1-bit quantization. Only 237 MB download. Runs on ultra-budget phones with 1.5 GB+ RAM.",
       "sizeInBytes": 248512512,
       "minDeviceMemoryInGb": 2,
@@ -961,7 +962,14 @@ constructor(
         // Process pending downloads.
         processPendingDownloads()
       } catch (e: Exception) {
+        Log.e(TAG, "Error loading model allowlist", e)
         e.printStackTrace()
+        _uiState.update {
+          uiState.value.copy(
+            loadingModelAllowlist = false,
+            loadingModelAllowlistError = "Error loading models: ${e.message}",
+          )
+        }
       }
     }
   }
