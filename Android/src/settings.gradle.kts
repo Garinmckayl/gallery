@@ -47,3 +47,4 @@ dependencyResolutionManagement {
 rootProject.name = "Ivy Edge"
 
 include(":app")
+include(":smollm")

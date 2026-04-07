@@ -21,6 +21,7 @@ import com.google.ai.edge.gallery.data.RuntimeType
 import com.google.ai.edge.gallery.ui.llmchat.LlmChatModelHelper
 
 val Model.runtimeHelper: LlmModelHelper
-  get() {
-    return LlmChatModelHelper
+  get() = when (runtimeType) {
+    RuntimeType.LLAMA_CPP -> LlamaCppModelHelper
+    else -> LlmChatModelHelper
   }

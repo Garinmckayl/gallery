@@ -1,2 +1,6 @@
 .DS_Store
 *.apk
+*.apk
+llama.cpp/
+Android/src/smollm/build/
+Android/src/smollm/.cxx/

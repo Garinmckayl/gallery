@@ -1,10 +1,28 @@
 {
   "models": [
     {
+      "name": "Ivy Model 1.7B (Bonsai 1-bit)",
+      "modelId": "prism-ml/Bonsai-1.7B-gguf",
+      "modelFile": "Bonsai-1.7B.gguf",
+      "description": "PrismML Bonsai 1.7B — true 1-bit quantization. Only 237 MB. Runs on ultra-budget phones with 1.5 GB+ RAM. Designed for Ivy Edge.",
+      "sizeInBytes": 248512512,
+      "estimatedPeakMemoryInBytes": 1610612736,
+      "version": "20250401",
+      "runtimeType": "llama_cpp",
+      "defaultConfig": {
+        "topK": 40,
+        "topP": 0.95,
+        "temperature": 0.7,
+        "maxTokens": 1024,
+        "accelerators": "cpu"
+      },
+      "taskTypes": ["llm_chat", "llm_prompt_lab"]
+    },
+    {
       "name": "Gemma3-1B-IT q4",
       "modelId": "litert-community/Gemma3-1B-IT",
       "modelFile": "Gemma3-1B-IT_multi-prefill-seq_q4_ekv2048.task",
-      "description": "Google Gemma 3 1B with 4-bit quantization. Best for phones with 2-3 GB RAM. 528 MB download.",
+      "description": "Google Gemma 3 1B with 4-bit quantization via LiteRT. 528 MB download, 2 GB peak RAM.",
       "sizeInBytes": 554661246,
       "estimatedPeakMemoryInBytes": 2147483648,
       "version": "20250514",

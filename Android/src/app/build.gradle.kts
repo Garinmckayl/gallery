@@ -87,6 +87,7 @@ dependencies {
   implementation(libs.androidx.security.crypto)
   implementation(libs.androidx.webkit)
   implementation(libs.litertlm)
+  implementation(project(":smollm"))  // llama.cpp backend for GGUF models (Bonsai)
   implementation(libs.commonmark)
   implementation(libs.richtext)
   implementation(libs.tflite)
