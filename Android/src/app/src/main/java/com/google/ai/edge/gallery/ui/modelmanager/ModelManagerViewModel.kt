@@ -79,7 +79,48 @@ private const val MODEL_ALLOWLIST_TEST_FILENAME = "model_allowlist_test.json"
 private const val ALLOWLIST_BASE_URL =
   "https://raw.githubusercontent.com/Garinmckayl/gallery/refs/heads/main/model_allowlists"
 
-private const val TEST_MODEL_ALLOW_LIST = ""
+private const val TEST_MODEL_ALLOW_LIST = """
+{
+  "models": [
+    {
+      "name": "Ivy Model 1.7B (Bonsai 1-bit)",
+      "modelId": "prism-ml/Bonsai-1.7B-gguf",
+      "modelFile": "Bonsai-1.7B.gguf",
+      "description": "PrismML Bonsai 1.7B with true 1-bit quantization. Only 237 MB download. Runs on ultra-budget phones with 1.5 GB+ RAM.",
+      "sizeInBytes": 248512512,
+      "minDeviceMemoryInGb": 2,
+      "runtimeType": "llama_cpp",
+      "defaultConfig": {
+        "topK": 40,
+        "topP": 0.95,
+        "temperature": 0.7,
+        "maxTokens": 1024,
+        "accelerators": "cpu"
+      },
+      "taskTypes": ["llm_chat", "llm_prompt_lab"],
+      "bestForTaskTypes": ["llm_chat"]
+    },
+    {
+      "name": "Gemma3-1B-IT",
+      "modelId": "litert-community/Gemma3-1B-IT",
+      "modelFile": "gemma3-1b-it-int4.litertlm",
+      "description": "Google Gemma 3 1B with 4-bit quantization via LiteRT. 557 MB download, needs 2 GB+ RAM.",
+      "sizeInBytes": 584417280,
+      "minDeviceMemoryInGb": 2,
+      "commitHash": "42d538a932e8d5b12e6b3b455f5572560bd60b2c",
+      "defaultConfig": {
+        "topK": 64,
+        "topP": 0.95,
+        "temperature": 1.0,
+        "maxTokens": 1024,
+        "accelerators": "gpu,cpu"
+      },
+      "taskTypes": ["llm_chat", "llm_prompt_lab"],
+      "bestForTaskTypes": ["llm_chat", "llm_prompt_lab"]
+    }
+  ]
+}
+"""
 
 data class ModelInitializationStatus(
   val status: ModelInitializationStatusType,
