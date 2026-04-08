@@ -105,7 +105,7 @@ private const val TEST_MODEL_ALLOW_LIST = """
       "name": "Gemma3-1B-IT",
       "modelId": "litert-community/Gemma3-1B-IT",
       "modelFile": "gemma3-1b-it-int4.litertlm",
-      "description": "Google Gemma 3 1B with 4-bit quantization via LiteRT. 557 MB download, needs 2 GB+ RAM.",
+      "description": "Gemma 3 1B with 4-bit quantization. 557 MB download, needs 2 GB+ RAM.",
       "sizeInBytes": 584417280,
       "minDeviceMemoryInGb": 2,
       "commitHash": "42d538a932e8d5b12e6b3b455f5572560bd60b2c",

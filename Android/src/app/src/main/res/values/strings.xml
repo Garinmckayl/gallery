@@ -20,17 +20,17 @@
   <string name="add" translatable="false">Add</string>
   <string name="added" translatable="false">Added</string>
   <string name="add_audio" translatable="false">+Audio</string>
-  <string name="aichat_initializing_title" translatable="false">Initializing model</string>
-  <string name="aichat_initializing_content" translatable="false">Sit tight, this can take up to 1 minute</string>
+  <string name="aichat_initializing_title" translatable="false">Ivy is getting ready</string>
+  <string name="aichat_initializing_content" translatable="false">Loading your AI tutor. This can take up to 1 minute on first use.</string>
   <string name="app_intro" translatable="false">Your on-device AI tutor. Learn anywhere, no internet required. Powered by</string>
-  <string name="app_name" translatable="false">Ivy Edge</string>
+  <string name="app_name" translatable="false">Ivy</string>
   <string name="app_name_first_part" translatable="false">Ivy</string>
-  <string name="app_name_second_part" translatable="false">Edge</string>
+  <string name="app_name_second_part" translatable="false">Tutor</string>
   <string name="askimage_emptystate_title" translatable="false">Ask Image</string>
   <string name="askimage_emptystate_content" translatable="false">To get started, tap the + below to add an image (max 10 images per chat) and type a prompt to ask a question about it!</string>
   <string name="askaudio_emptystate_title" translatable="false">Ask Audio</string>
   <string name="askaudio_emptystate_content" translatable="false">To get started, tap the + below to add a audio clip (limited to 1 clip up to 30 seconds) and type a prompt to transcribe or translate it!</string>
-  <string name="gallery_news_notification_title" translatable="false">Ivy Edge News</string>
+  <string name="gallery_news_notification_title" translatable="false">Ivy Updates</string>
   <string name="baseline" translatable="false">Baseline</string>
   <string name="basic_info" translatable="false">Basic info</string>
   <string name="benchmark" translatable="false">Benchmark</string>
@@ -44,13 +44,13 @@
   <string name="model_list_experimental_label" translatable="false">EXPERIMENTAL</string>
   <string name="cancel" translatable="false">Cancel</string>
   <string name="category_unlabeled" translatable="false">Unlabeled</string>
-  <string name="category_llm" translatable="false">LLM</string>
+  <string name="category_llm" translatable="false">Tutoring</string>
   <string name="category_agents" translatable="false">Agents</string>
   <string name="category_classical_ml" translatable="false">Classical ML</string>
   <string name="category_experimental" translatable="false">Experimental</string>
-  <string name="chat_textinput_placeholder" translatable="false">Type message…</string>
+  <string name="chat_textinput_placeholder" translatable="false">Ask Ivy anything…</string>
   <string name="chat_you" translatable="false">You</string>
-  <string name="chat_llm_agent_name" translatable="false">LLM</string>
+  <string name="chat_llm_agent_name" translatable="false">Ivy</string>
   <string name="show_thinking" translatable="false">Show thinking</string>
   <string name="checking_access" translatable="false">Checking access...</string>
   <string name="close" translatable="false">Close</string>
@@ -66,7 +66,7 @@
   <string name="conversation_reset_message" translatable="false">Conversation was reset</string>
   <string name="engin_reset_message" translatable="false">Engine was reset</string>
   <string name="chat_agent_agent_name" translatable="false">Agent</string>
-  <string name="chat_generic_agent_name" translatable="false">Model</string>
+  <string name="chat_generic_agent_name" translatable="false">Ivy</string>
   <string name="chat_generic_result_name" translatable="false">Result</string>
   <string name="clear" translatable="false">Clear</string>
   <string name="collect" translatable="false">Collect</string>
@@ -169,8 +169,8 @@
   <string name="tap_to_see_value" translatable="false">Tap on graph to see value</string>
   <string name="test" translatable="false">Test</string>
   <string name="text_image_generation_text_field_placeholder" translatable="false">Type prompt…</string>
-  <string name="text_input_placeholder_llm_chat" translatable="false">Type prompt…</string>
-  <string name="tos_dialog_title_app" translatable="false">Welcome to Ivy Edge</string>
+  <string name="text_input_placeholder_llm_chat" translatable="false">Ask Ivy a question…</string>
+  <string name="tos_dialog_title_app" translatable="false">Welcome to Ivy</string>
   <string name="tos_dialog_title_gemma" translatable="false">Gemma Terms of Use</string>
   <string name="tos_dialog_accept_and_continue_button_label" translatable="false">Accept &amp; continue</string>
   <string name="tos_dialog_agree_and_continue_button_label" translatable="false">Agree &amp; continue</string>
@@ -242,7 +242,7 @@
   <string name="add_skill_manual_input_sheet_title" translatable="false">Create a skill</string>
   <string name="agent_skills" translatable="false">Agent Skills</string>
   <string name="agent_skills_description" translatable="false">Use specialized, high-order reasoning by loading different skills or creating your own.\n\nTry tapping a sample prompt below to see Agent Skills in action!</string>
-  <string name="disclaimer_dialog_content" translatable="false">Third-party skills are not authored or endorsed by Google. Google is not responsible for their contents, security, or data handling practices.\n\nPlease exercise caution before providing sensitive information, such as personal identification, tokens, or API keys.\n\nAny use of an Agent Skill is subject to the applicable terms for that Skill.</string>
+  <string name="disclaimer_dialog_content" translatable="false">Third-party skills are not authored or endorsed by Ivy. Ivy is not responsible for their contents, security, or data handling practices.\n\nPlease exercise caution before providing sensitive information, such as personal identification, tokens, or API keys.\n\nAny use of an Agent Skill is subject to the applicable terms for that Skill.</string>
   <string name="disclaimer_dialog_title" translatable="false">Add third-party skill</string>
   <string name="disclaimer_dialog_agree" translatable="false">Agree</string>
   <string name="delete_script_dialog_title" translatable="false">Delete script</string>
@@ -269,8 +269,8 @@
   <string name="enter_skill_url" translatable="false">Enter URL of skill\'s root directory</string>
   <string name="featured_skills_title" translatable="false">Featured skills</string>
   <string name="featured_skills_description" translatable="false">A curated list of community contributed skills</string>
-  <string name="generate_llm_prompt_title" translatable="false">Generate LLM prompt</string>
-  <string name="generate_llm_prompt_button_label" translatable="false">LLM prompt</string>
+  <string name="generate_llm_prompt_title" translatable="false">Generate prompt</string>
+  <string name="generate_llm_prompt_button_label" translatable="false">AI prompt</string>
   <string name="learn_how_to_write_skills" translatable="false">Learn how to write skills</string>
   <string name="loading_skills_allowlist" translatable="false">Loading featured skills...</string>
   <string name="manage_skills" translatable="false">Manage skills</string>
