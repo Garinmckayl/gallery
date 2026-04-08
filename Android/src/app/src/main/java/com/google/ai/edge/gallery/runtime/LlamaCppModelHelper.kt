@@ -13,16 +13,27 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-/**
- * llama.cpp backend for GGUF models (Bonsai 1-bit family).
- * Implements the same LlmModelHelper interface as the LiteRT backend,
- * so the Gallery UI works identically for both model formats.
- */
+private const val IVY_SYSTEM_PROMPT = """You are Ivy, an AI tutor for Ethiopian students. You teach using the Socratic method. You MUST respond in English unless the student writes in Amharic.
+
+RULES:
+1. Never give answers directly. Ask guiding questions to help students discover answers.
+2. Be warm, encouraging, and patient. Use simple language.
+3. When a student is stuck, break the problem into smaller steps.
+4. Celebrate progress with genuine praise.
+5. You can teach in both English and Amharic. Match the student's language.
+6. Focus on understanding, not memorization.
+7. For math/science, work through problems step by step.
+8. Keep responses concise (2-4 sentences) since you're running on-device.
+9. ALWAYS respond in English by default. Only use Amharic if the student writes in Amharic.
+
+You are running entirely on this student's phone with no internet. You are always available.
+Subjects: Mathematics, Biology, Chemistry, Physics, English, Amharic, History, Geography (Ethiopian Grade 9-12 curriculum).
+
+When the student says hello or hi, introduce yourself as Ivy and ask what subject they'd like to study today."""
+
 object LlamaCppModelHelper : LlmModelHelper {
 
   private const val TAG = "LlamaCppModelHelper"
-
-  // Store SmolLM instance per model (keyed by model name)
   private val instances = mutableMapOf<String, SmolLM>()
   private var currentJob: Job? = null
 
@@ -41,12 +52,10 @@ object LlamaCppModelHelper : LlmModelHelper {
     scope.launch {
       try {
         Log.i(TAG, "Initializing llama.cpp for: ${model.name}")
-        Log.i(TAG, "Model path: ${model.url}")
 
         val smolLM = SmolLM()
-
         val modelPath = model.getPath(context)
-        Log.i(TAG, "Loading GGUF model from: $modelPath")
+        Log.i(TAG, "Loading GGUF from: $modelPath")
 
         smolLM.load(
           modelPath = modelPath,
@@ -56,24 +65,22 @@ object LlamaCppModelHelper : LlmModelHelper {
             minP = 0.1f,
             useMmap = true,
             useMlock = false,
-            storeChats = false,
+            storeChats = true,
           )
         )
 
-        // Add system prompt if provided
-        val systemText = systemInstruction?.toString()
-        if (!systemText.isNullOrEmpty()) {
-          smolLM.addSystemPrompt(systemText)
-        }
+        // Inject Ivy's Socratic tutor system prompt directly
+        smolLM.addSystemPrompt(IVY_SYSTEM_PROMPT)
+        Log.i(TAG, "System prompt injected (${IVY_SYSTEM_PROMPT.length} chars)")
 
         instances[model.name] = smolLM
-        model.instance = smolLM  // Store on model for later access
+        model.instance = smolLM
 
-        Log.i(TAG, "llama.cpp model loaded: ${model.name}")
+        Log.i(TAG, "Model loaded: ${model.name}")
         launch(Dispatchers.Main) { onDone("") }
 
       } catch (e: Exception) {
-        Log.e(TAG, "Failed to load model: ${model.name}", e)
+        Log.e(TAG, "Failed to load: ${model.name}", e)
         launch(Dispatchers.Main) { onDone("Error: ${e.message}") }
       }
     }
@@ -87,8 +94,6 @@ object LlamaCppModelHelper : LlmModelHelper {
     tools: List<ToolProvider>,
     enableConversationConstrainedDecoding: Boolean,
   ) {
-    // SmolLM doesn't have a reset API -- we'd need to reload
-    // For now, just log
     Log.i(TAG, "Reset conversation for ${model.name}")
   }
 
@@ -97,7 +102,6 @@ object LlamaCppModelHelper : LlmModelHelper {
       val smolLM = instances.remove(model.name)
       smolLM?.close()
       model.instance = null
-      Log.i(TAG, "Cleaned up ${model.name}")
     } catch (e: Exception) {
       Log.e(TAG, "Cleanup error", e)
     }
@@ -124,7 +128,9 @@ object LlamaCppModelHelper : LlmModelHelper {
     val scope = coroutineScope ?: CoroutineScope(Dispatchers.IO)
     currentJob = scope.launch {
       try {
+        var hasTokens = false
         smolLM.getResponseAsFlow(input).collect { token ->
+          hasTokens = true
           launch(Dispatchers.Main) {
             resultListener(token, false, null)
           }

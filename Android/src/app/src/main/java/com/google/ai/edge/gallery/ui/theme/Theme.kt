@@ -314,10 +314,8 @@ fun StatusBarColorController(useDarkTheme: Boolean) {
 
 @Composable
 fun GalleryTheme(content: @Composable () -> Unit) {
-  val themeOverride = ThemeSettings.themeOverride
-  val darkTheme: Boolean =
-    (isSystemInDarkTheme() || themeOverride.value == Theme.THEME_DARK) &&
-      themeOverride.value != Theme.THEME_LIGHT
+  // Ivy Edge: ALWAYS use light theme
+  val darkTheme = false
   val view = LocalView.current
 
   StatusBarColorController(useDarkTheme = darkTheme)
