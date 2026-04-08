@@ -621,7 +621,7 @@ private fun AppTitle(enableAnimation: Boolean) {
 @Composable
 fun AppTitleGm4(enableAnimation: Boolean) {
   val text1 = "Ivy"
-  val text2 = "Tutor"
+  val text2 = "Edge"
   val annotatedText = buildAnnotatedString {
     withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.onSurface)) { append(text1) }
     append(" ")

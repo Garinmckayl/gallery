@@ -146,47 +146,43 @@ val LocalCustomColors = staticCompositionLocalOf { CustomColors() }
 
 val lightCustomColors =
   CustomColors(
-    appTitleGradientColors = listOf(Color(0xFF312E81), Color(0xFF1E1B4B)),
-    tabHeaderBgColor = Color(0xFF1E1B4B),
+    appTitleGradientColors = listOf(Color(0xFF22C55E), Color(0xFF16A34A)),
+    tabHeaderBgColor = Color(0xFF16A34A),
     taskCardBgColor = surfaceContainerLowestLight,
     taskBgColors =
       listOf(
-        // indigo
+        // green (primary)
+        Color(0xFFF0FDF4),
+        // gold (achievement)
+        Color(0xFFFFFBEB),
+        // indigo (depth)
         Color(0xFFF0EFF8),
-        // green
-        Color(0xFFF4FBF6),
-        // gold
-        Color(0xFFFFF8E8),
-        // parchment
-        Color(0xFFF7F6F1),
+        // white (clean)
+        Color(0xFFFFFFFF),
       ),
     taskBgGradientColors =
       listOf(
-        // indigo
-        listOf(Color(0xFF312E81), Color(0xFF1E1B4B)),
         // green
         listOf(Color(0xFF22C55E), Color(0xFF16A34A)),
         // gold
         listOf(Color(0xFFF5A623), Color(0xFFD4880C)),
-        // parchment
-        listOf(Color(0xFFE8E7E0), Color(0xFFD5D4CD)),
+        // indigo
+        listOf(Color(0xFF312E81), Color(0xFF1E1B4B)),
+        // light
+        listOf(Color(0xFFF5F5F5), Color(0xFFE5E5E5)),
       ),
     taskIconColors =
       listOf(
-        // red.
-        Color(0xFFDB372D),
-        // green
-        Color(0xFF128937),
-        // blue
-        Color(0xFF3174F1),
-        // yellow
-        Color(0xFFCAA12A),
+        Color(0xFF16A34A),
+        Color(0xFFF5A623),
+        Color(0xFF1E1B4B),
+        Color(0xFF6B7280),
       ),
     taskIconShapeBgColor = Color.White,
-    homeBottomGradient = listOf(Color(0x00F8F9FF), Color(0xffFFEFC9)),
-    agentBubbleBgColor = Color(0xFFF0EFF8),
-    userBubbleBgColor = Color(0xFF1E1B4B),
-    linkColor = Color(0xFF312E81),
+    homeBottomGradient = listOf(Color(0x00FFFFFF), Color(0xFFF0FDF4)),
+    agentBubbleBgColor = Color(0xFFF0FDF4),       // Very light green -- Ivy's bubble
+    userBubbleBgColor = Color(0xFF16A34A),          // Green -- student's bubble
+    linkColor = Color(0xFF16A34A),
     successColor = Color(0xff3d860b),
     recordButtonBgColor = Color(0xFFEE675C),
     waveFormBgColor = Color(0xFFaaaaaa),

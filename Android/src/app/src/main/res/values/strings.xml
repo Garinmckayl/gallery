@@ -23,9 +23,9 @@
   <string name="aichat_initializing_title" translatable="false">Ivy is getting ready</string>
   <string name="aichat_initializing_content" translatable="false">Loading your AI tutor. This can take up to 1 minute on first use.</string>
   <string name="app_intro" translatable="false">Your on-device AI tutor. Learn anywhere, no internet required. Powered by</string>
-  <string name="app_name" translatable="false">Ivy</string>
+  <string name="app_name" translatable="false">Ivy Edge</string>
   <string name="app_name_first_part" translatable="false">Ivy</string>
-  <string name="app_name_second_part" translatable="false">Tutor</string>
+  <string name="app_name_second_part" translatable="false">Edge</string>
   <string name="askimage_emptystate_title" translatable="false">Ask Image</string>
   <string name="askimage_emptystate_content" translatable="false">To get started, tap the + below to add an image (max 10 images per chat) and type a prompt to ask a question about it!</string>
   <string name="askaudio_emptystate_title" translatable="false">Ask Audio</string>
@@ -170,7 +170,7 @@
   <string name="test" translatable="false">Test</string>
   <string name="text_image_generation_text_field_placeholder" translatable="false">Type prompt…</string>
   <string name="text_input_placeholder_llm_chat" translatable="false">Ask Ivy a question…</string>
-  <string name="tos_dialog_title_app" translatable="false">Welcome to Ivy</string>
+  <string name="tos_dialog_title_app" translatable="false">Welcome to Ivy Edge</string>
   <string name="tos_dialog_title_gemma" translatable="false">Gemma Terms of Use</string>
   <string name="tos_dialog_accept_and_continue_button_label" translatable="false">Accept &amp; continue</string>
   <string name="tos_dialog_agree_and_continue_button_label" translatable="false">Agree &amp; continue</string>

@@ -186,27 +186,8 @@ fun GalleryNavHost(
     enterTransition = { EnterTransition.None },
     exitTransition = { ExitTransition.None },
   ) {
-    // Home screen -- auto-navigate to LLM Chat with first available model.
+    // Home screen — model selector.
     composable(route = ROUTE_HOMESCREEN) {
-      val uiState by modelManagerViewModel.uiState.collectAsState()
-
-      // Auto-navigate to chat once models are loaded
-      LaunchedEffect(uiState.loadingModelAllowlist) {
-        if (!uiState.loadingModelAllowlist) {
-          // Find the first LLM chat task with models
-          val chatTask = uiState.tasks.find { it.id == "llm_chat" }
-          val firstModel = chatTask?.models?.firstOrNull()
-          if (chatTask != null && firstModel != null) {
-            navController.navigate(
-              "$ROUTE_MODEL/${chatTask.id}/${firstModel.name}"
-            ) {
-              popUpTo(ROUTE_HOMESCREEN) { inclusive = true }
-            }
-          }
-        }
-      }
-
-      // Show home screen as fallback while loading
       Box(modifier = modifier.fillMaxSize()) {
         HomeScreen(
           modelManagerViewModel = modelManagerViewModel,
