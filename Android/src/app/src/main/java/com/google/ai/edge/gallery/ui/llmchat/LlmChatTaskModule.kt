@@ -59,14 +59,14 @@ class LlmChatTask @Inject constructor() : CustomTask {
   override val task: Task =
     Task(
       id = BuiltInTaskId.LLM_CHAT,
-      label = "Ivy Tutor",
+      label = "Ivy Edge Tutor",
       category = Category.LLM,
       icon = Icons.Outlined.Forum,
       models = mutableListOf(),
       description = "Chat with Ivy, your on-device AI tutor",
       shortDescription = "Learn with Ivy offline",
-      docUrl = "https://github.com/Garinmckayl/ivy",
-      sourceCodeUrl = "https://github.com/Garinmckayl/gallery",
+      docUrl = "",
+      sourceCodeUrl = "",
       textInputPlaceHolderRes = R.string.text_input_placeholder_llm_chat,
       defaultSystemPrompt =
         """
@@ -207,11 +207,11 @@ class LlmAskImageTask @Inject constructor() : CustomTask {
   }
 }
 
-@Module
-@InstallIn(SingletonComponent::class) // Or another component that fits your scope
+// @Module -- DISABLED for Ivy Edge (Ask Image not needed)
+// @InstallIn(SingletonComponent::class)
 internal object LlmAskImageModule {
-  @Provides
-  @IntoSet
+  // @Provides
+  // @IntoSet
   fun provideTask(): CustomTask {
     return LlmAskImageTask()
   }
@@ -272,11 +272,11 @@ class LlmAskAudioTask @Inject constructor() : CustomTask {
   }
 }
 
-@Module
-@InstallIn(SingletonComponent::class) // Or another component that fits your scope
+// @Module -- DISABLED for Ivy Edge (Ask Audio not needed)
+// @InstallIn(SingletonComponent::class)
 internal object LlmAskAudioModule {
-  @Provides
-  @IntoSet
+  // @Provides
+  // @IntoSet
   fun provideTask(): CustomTask {
     return LlmAskAudioTask()
   }

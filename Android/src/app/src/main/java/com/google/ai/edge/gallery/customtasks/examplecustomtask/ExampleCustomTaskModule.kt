@@ -31,8 +31,8 @@ import dagger.multibindings.IntoSet
  * to a `Set<CustomTask>`, which the main app will use to discover all available custom tasks
  * without needing to know about each one individually.
  */
-@Module
-@InstallIn(SingletonComponent::class) // Or another component that fits your scope
+// @Module
+// @InstallIn(SingletonComponent::class) // Or another component that fits your scope
 internal object ExampleCustomTaskModule {
   /* Remove comment to enable the function to see this example custom task in action in the app.
   @Provides
