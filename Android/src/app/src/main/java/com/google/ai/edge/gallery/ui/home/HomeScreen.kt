@@ -438,9 +438,6 @@ fun HomeScreen(
                     AppTitle(enableAnimation = enableAnimation)
                   }
                   IntroText(enableAnimation = enableAnimation, gm4 = gm4)
-                  if (gm4) {
-                    TryGm4IntroText(enableAnimation = enableAnimation)
-                  }
                 }
 
                 // Tab header for categories.
@@ -846,10 +843,8 @@ private fun TaskList(
     ) {
       val chatToDescription =
         mapOf(
-          BuiltInTaskId.LLM_CHAT to "Chat with the latest Gemma 4 model today",
-          // use "\u00a0" to make sure the word before and after it should always be together when
-          // wrapping lines.
-          BuiltInTaskId.LLM_AGENT_CHAT to "Have Gemma 4 complete agentic tasks for\u00A0you",
+          BuiltInTaskId.LLM_CHAT to "Start learning with Ivy — your Socratic AI tutor",
+          BuiltInTaskId.LLM_AGENT_CHAT to "Advanced tutoring with agent skills",
         )
       for (task in
         listOf(
@@ -867,7 +862,7 @@ private fun TaskList(
       }
 
       Text(
-        text = "Explore other use cases",
+        text = "More learning tools",
         style =
           MaterialTheme.typography.headlineSmall.copy(
             fontWeight = FontWeight.Medium,
