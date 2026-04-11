@@ -190,8 +190,8 @@ fun ModelNameAndStatus(
       }
     }
 
-    // Learn more url.
-    if (!model.imported && model.learnMoreUrl.isNotEmpty()) {
+    // Learn more url — hidden for Ivy Edge
+    if (false && !model.imported && model.learnMoreUrl.isNotEmpty()) {
       Row(verticalAlignment = Alignment.CenterVertically) {
         Icon(
           Icons.AutoMirrored.Outlined.OpenInNew,
