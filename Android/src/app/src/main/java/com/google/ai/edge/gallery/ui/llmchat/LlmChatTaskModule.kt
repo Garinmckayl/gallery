@@ -59,35 +59,16 @@ class LlmChatTask @Inject constructor() : CustomTask {
   override val task: Task =
     Task(
       id = BuiltInTaskId.LLM_CHAT,
-      label = "Ivy Edge Tutor",
+      label = "AI Chat",
       category = Category.LLM,
       icon = Icons.Outlined.Forum,
       models = mutableListOf(),
-      description = "Chat with Ivy, your on-device AI tutor",
-      shortDescription = "Learn with Ivy offline",
-      docUrl = "",
-      sourceCodeUrl = "",
+      description = "Chat with on-device large language models",
+      shortDescription = "Chat with an on-device LLM",
+      docUrl = "https://github.com/google-ai-edge/LiteRT-LM/blob/main/kotlin/README.md",
+      sourceCodeUrl =
+        "https://github.com/google-ai-edge/gallery/blob/main/Android/src/app/src/main/java/com/google/ai/edge/gallery/ui/llmchat/LlmChatModelHelper.kt",
       textInputPlaceHolderRes = R.string.text_input_placeholder_llm_chat,
-      defaultSystemPrompt =
-        """
-You are Ivy, an AI tutor for Ethiopian students. You teach using the Socratic method.
-
-RULES:
-1. Never give answers directly. Ask guiding questions to help students discover answers.
-2. Be warm, encouraging, and patient. Use simple language.
-3. When a student is stuck, break the problem into smaller steps.
-4. Celebrate progress with genuine praise.
-5. You can teach in both English and Amharic. Match the student's language.
-6. Focus on understanding, not memorization.
-7. For math/science, work through problems step by step.
-8. Keep responses concise (2-4 sentences) since you're running on-device.
-9. Use culturally relevant examples (birr for money, injera for fractions, Ethiopian geography for distance).
-
-You are running entirely on this student's phone with no internet. You are always available - during power outages, in rural areas, on the bus to school. You are their personal tutor that never leaves their side.
-
-Subjects: Mathematics, Biology, Chemistry, Physics, English, Amharic, History, Geography (Ethiopian Grade 9-12 curriculum).
-        """
-          .trimIndent(),
     )
 
   override fun initializeModelFn(
@@ -207,11 +188,11 @@ class LlmAskImageTask @Inject constructor() : CustomTask {
   }
 }
 
-// @Module -- DISABLED for Ivy Edge (Ask Image not needed)
-// @InstallIn(SingletonComponent::class)
+@Module
+@InstallIn(SingletonComponent::class) // Or another component that fits your scope
 internal object LlmAskImageModule {
-  // @Provides
-  // @IntoSet
+  @Provides
+  @IntoSet
   fun provideTask(): CustomTask {
     return LlmAskImageTask()
   }
@@ -272,11 +253,11 @@ class LlmAskAudioTask @Inject constructor() : CustomTask {
   }
 }
 
-// @Module -- DISABLED for Ivy Edge (Ask Audio not needed)
-// @InstallIn(SingletonComponent::class)
+@Module
+@InstallIn(SingletonComponent::class) // Or another component that fits your scope
 internal object LlmAskAudioModule {
-  // @Provides
-  // @IntoSet
+  @Provides
+  @IntoSet
   fun provideTask(): CustomTask {
     return LlmAskAudioTask()
   }

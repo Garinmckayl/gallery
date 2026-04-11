@@ -13,11 +13,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-private const val IVY_SYSTEM_PROMPT = """You are Ivy, an AI tutor for Ethiopian students. Respond in English unless the student writes in Amharic. Use the Socratic method: ask guiding questions, never give answers directly. Be warm and encouraging. Keep responses to 2-3 sentences. Use Ethiopian examples when relevant."""
-
+/**
+ * llama.cpp backend for GGUF models (Bonsai 1-bit family).
+ * Implements the same LlmModelHelper interface as the LiteRT backend,
+ * so the Gallery UI works identically for both model formats.
+ */
 object LlamaCppModelHelper : LlmModelHelper {
 
   private const val TAG = "LlamaCppModelHelper"
+
+  // Store SmolLM instance per model (keyed by model name)
   private val instances = mutableMapOf<String, SmolLM>()
   private var currentJob: Job? = null
 
@@ -36,10 +41,12 @@ object LlamaCppModelHelper : LlmModelHelper {
     scope.launch {
       try {
         Log.i(TAG, "Initializing llama.cpp for: ${model.name}")
+        Log.i(TAG, "Model path: ${model.url}")
 
         val smolLM = SmolLM()
+
         val modelPath = model.getPath(context)
-        Log.i(TAG, "Loading GGUF from: $modelPath")
+        Log.i(TAG, "Loading GGUF model from: $modelPath")
 
         smolLM.load(
           modelPath = modelPath,
@@ -53,14 +60,20 @@ object LlamaCppModelHelper : LlmModelHelper {
           )
         )
 
-        instances[model.name] = smolLM
-        model.instance = smolLM
+        // Add system prompt if provided
+        val systemText = systemInstruction?.toString()
+        if (!systemText.isNullOrEmpty()) {
+          smolLM.addSystemPrompt(systemText)
+        }
 
-        Log.i(TAG, "Model loaded: ${model.name}")
+        instances[model.name] = smolLM
+        model.instance = smolLM  // Store on model for later access
+
+        Log.i(TAG, "llama.cpp model loaded: ${model.name}")
         launch(Dispatchers.Main) { onDone("") }
 
       } catch (e: Exception) {
-        Log.e(TAG, "Failed to load: ${model.name}", e)
+        Log.e(TAG, "Failed to load model: ${model.name}", e)
         launch(Dispatchers.Main) { onDone("Error: ${e.message}") }
       }
     }
@@ -74,6 +87,8 @@ object LlamaCppModelHelper : LlmModelHelper {
     tools: List<ToolProvider>,
     enableConversationConstrainedDecoding: Boolean,
   ) {
+    // SmolLM doesn't have a reset API -- we'd need to reload
+    // For now, just log
     Log.i(TAG, "Reset conversation for ${model.name}")
   }
 
@@ -82,6 +97,7 @@ object LlamaCppModelHelper : LlmModelHelper {
       val smolLM = instances.remove(model.name)
       smolLM?.close()
       model.instance = null
+      Log.i(TAG, "Cleaned up ${model.name}")
     } catch (e: Exception) {
       Log.e(TAG, "Cleanup error", e)
     }
@@ -108,9 +124,7 @@ object LlamaCppModelHelper : LlmModelHelper {
     val scope = coroutineScope ?: CoroutineScope(Dispatchers.IO)
     currentJob = scope.launch {
       try {
-        // Prepend system instruction to user message (avoids addSystemPrompt JNI crash)
-        val promptWithContext = "[Instruction: $IVY_SYSTEM_PROMPT]\n\nStudent: $input\n\nIvy:"
-        smolLM.getResponseAsFlow(promptWithContext).collect { token ->
+        smolLM.getResponseAsFlow(input).collect { token ->
           launch(Dispatchers.Main) {
             resultListener(token, false, null)
           }

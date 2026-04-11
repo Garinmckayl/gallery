@@ -68,9 +68,9 @@ fun GalleryTopAppBar(
         ) {
           if (title == stringResource(R.string.app_name)) {
             Icon(
-              painterResource(R.drawable.ivy_logo),
-              modifier = Modifier.size(24.dp),
-              contentDescription = "Ivy Edge",
+              painterResource(R.drawable.logo),
+              modifier = Modifier.size(20.dp),
+              contentDescription = null,
               tint = Color.Unspecified,
             )
           }

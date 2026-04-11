@@ -117,11 +117,11 @@ class AgentChatTask @Inject constructor() : CustomTask {
   }
 }
 
-// @Module
-// @InstallIn(SingletonComponent::class)
+@Module
+@InstallIn(SingletonComponent::class)
 internal object AgentChatTaskModule {
-  // @Provides
-  // @IntoSet
+  @Provides
+  @IntoSet
   fun provideTask(): CustomTask {
     return AgentChatTask()
   }

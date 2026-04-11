@@ -146,43 +146,47 @@ val LocalCustomColors = staticCompositionLocalOf { CustomColors() }
 
 val lightCustomColors =
   CustomColors(
-    appTitleGradientColors = listOf(Color(0xFF22C55E), Color(0xFF16A34A)),
-    tabHeaderBgColor = Color(0xFF16A34A),
+    appTitleGradientColors = listOf(Color(0xFF312E81), Color(0xFF1E1B4B)),
+    tabHeaderBgColor = Color(0xFF1E1B4B),
     taskCardBgColor = surfaceContainerLowestLight,
     taskBgColors =
       listOf(
-        // green (primary)
-        Color(0xFFF0FDF4),
-        // gold (achievement)
-        Color(0xFFFFFBEB),
-        // indigo (depth)
+        // indigo
         Color(0xFFF0EFF8),
-        // white (clean)
-        Color(0xFFFFFFFF),
+        // green
+        Color(0xFFF4FBF6),
+        // gold
+        Color(0xFFFFF8E8),
+        // parchment
+        Color(0xFFF7F6F1),
       ),
     taskBgGradientColors =
       listOf(
+        // indigo
+        listOf(Color(0xFF312E81), Color(0xFF1E1B4B)),
         // green
         listOf(Color(0xFF22C55E), Color(0xFF16A34A)),
         // gold
         listOf(Color(0xFFF5A623), Color(0xFFD4880C)),
-        // indigo
-        listOf(Color(0xFF312E81), Color(0xFF1E1B4B)),
-        // light
-        listOf(Color(0xFFF5F5F5), Color(0xFFE5E5E5)),
+        // parchment
+        listOf(Color(0xFFE8E7E0), Color(0xFFD5D4CD)),
       ),
     taskIconColors =
       listOf(
-        Color(0xFF16A34A),
-        Color(0xFFF5A623),
-        Color(0xFF1E1B4B),
-        Color(0xFF6B7280),
+        // red.
+        Color(0xFFDB372D),
+        // green
+        Color(0xFF128937),
+        // blue
+        Color(0xFF3174F1),
+        // yellow
+        Color(0xFFCAA12A),
       ),
     taskIconShapeBgColor = Color.White,
-    homeBottomGradient = listOf(Color(0x00FFFFFF), Color(0xFFF0FDF4)),
-    agentBubbleBgColor = Color(0xFFF0FDF4),       // Very light green -- Ivy's bubble
-    userBubbleBgColor = Color(0xFF16A34A),          // Green -- student's bubble
-    linkColor = Color(0xFF16A34A),
+    homeBottomGradient = listOf(Color(0x00F8F9FF), Color(0xffFFEFC9)),
+    agentBubbleBgColor = Color(0xFFe9eef6),
+    userBubbleBgColor = Color(0xFF32628D),
+    linkColor = Color(0xFF32628D),
     successColor = Color(0xff3d860b),
     recordButtonBgColor = Color(0xFFEE675C),
     waveFormBgColor = Color(0xFFaaaaaa),
@@ -314,8 +318,10 @@ fun StatusBarColorController(useDarkTheme: Boolean) {
 
 @Composable
 fun GalleryTheme(content: @Composable () -> Unit) {
-  // Ivy Edge: ALWAYS use light theme
-  val darkTheme = false
+  val themeOverride = ThemeSettings.themeOverride
+  val darkTheme: Boolean =
+    (isSystemInDarkTheme() || themeOverride.value == Theme.THEME_DARK) &&
+      themeOverride.value != Theme.THEME_LIGHT
   val view = LocalView.current
 
   StatusBarColorController(useDarkTheme = darkTheme)
