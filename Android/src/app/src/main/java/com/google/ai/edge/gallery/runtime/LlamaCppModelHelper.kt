@@ -53,10 +53,6 @@ object LlamaCppModelHelper : LlmModelHelper {
           )
         )
 
-        // Inject Ivy's Socratic tutor system prompt directly
-        smolLM.addSystemPrompt(IVY_SYSTEM_PROMPT)
-        Log.i(TAG, "System prompt injected (${IVY_SYSTEM_PROMPT.length} chars)")
-
         instances[model.name] = smolLM
         model.instance = smolLM
 
@@ -112,9 +108,9 @@ object LlamaCppModelHelper : LlmModelHelper {
     val scope = coroutineScope ?: CoroutineScope(Dispatchers.IO)
     currentJob = scope.launch {
       try {
-        var hasTokens = false
-        smolLM.getResponseAsFlow(input).collect { token ->
-          hasTokens = true
+        // Prepend system instruction to user message (avoids addSystemPrompt JNI crash)
+        val promptWithContext = "[Instruction: $IVY_SYSTEM_PROMPT]\n\nStudent: $input\n\nIvy:"
+        smolLM.getResponseAsFlow(promptWithContext).collect { token ->
           launch(Dispatchers.Main) {
             resultListener(token, false, null)
           }
