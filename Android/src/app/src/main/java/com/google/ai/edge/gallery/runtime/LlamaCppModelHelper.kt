@@ -124,7 +124,8 @@ object LlamaCppModelHelper : LlmModelHelper {
     val scope = coroutineScope ?: CoroutineScope(Dispatchers.IO)
     currentJob = scope.launch {
       try {
-        smolLM.getResponseAsFlow(input).collect { token ->
+        val prompt = "[Instruction: You are Ivy, an AI tutor for Ethiopian students. Respond in English. Use the Socratic method: ask guiding questions. Be warm. Keep responses to 2-3 sentences.]\n\nStudent: $input\n\nIvy:"
+        smolLM.getResponseAsFlow(prompt).collect { token ->
           launch(Dispatchers.Main) {
             resultListener(token, false, null)
           }

@@ -22,11 +22,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 
-@Module
-@InstallIn(SingletonComponent::class)
+// @Module
+// @InstallIn(SingletonComponent::class)
 internal object MobileActionsModule {
-  @Provides
-  @IntoSet
+  // @Provides
+  // @IntoSet
   fun provideTask(): CustomTask {
     return MobileActionsTask()
   }

@@ -18,35 +18,35 @@ package com.google.ai.edge.gallery.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Ivy Edge - Deep Indigo Academic Theme
-val primaryLight = Color(0xFF1E1B4B)         // Deep Indigo
+// Ivy Edge — Warm Education Theme
+val primaryLight = Color(0xFF16A34A)
 val onPrimaryLight = Color(0xFFFFFFFF)
-val primaryContainerLight = Color(0xFFE0DEF5) // Light indigo container
-val onPrimaryContainerLight = Color(0xFF1E1B4B)
-val secondaryLight = Color(0xFFF5A623)        // Solar Gold
+val primaryContainerLight = Color(0xFFDCFCE7)
+val onPrimaryContainerLight = Color(0xFF0D6B2F)
+val secondaryLight = Color(0xFFF5A623)
 val onSecondaryLight = Color(0xFFFFFFFF)
 val secondaryContainerLight = Color(0xFFFFF3D6)
 val onSecondaryContainerLight = Color(0xFFD4880C)
-val tertiaryLight = Color(0xFF16A34A)         // Emerald - Growth
+val tertiaryLight = Color(0xFF1E1B4B)
 val onTertiaryLight = Color(0xFFFFFFFF)
-val tertiaryContainerLight = Color(0xFFC4EED0)
-val onTertiaryContainerLight = Color(0xFF0F5223)
+val tertiaryContainerLight = Color(0xFFE0DEF5)
+val onTertiaryContainerLight = Color(0xFF1E1B4B)
 val errorLight = Color(0xFFDC2626)
 val onErrorLight = Color(0xFFFFFFFF)
 val errorContainerLight = Color(0xFFFEE2E2)
 val onErrorContainerLight = Color(0xFF991B1B)
-val backgroundLight = Color(0xFFF7F6F1)       // Warm Parchment
+val backgroundLight = Color(0xFFFFFFFF)
 val onBackgroundLight = Color(0xFF1A1A1A)
 val surfaceLight = Color(0xFFFFFFFF)
 val onSurfaceLight = Color(0xFF1A1A1A)
-val surfaceVariantLight = Color(0xFFF0EFE8)
-val onSurfaceVariantLight = Color(0xFF444746)
+val surfaceVariantLight = Color(0xFFF5F5F5)
+val onSurfaceVariantLight = Color(0xFF6B7280)
 val surfaceContainerLowestLight = Color(0xFFFFFFFF)
-val surfaceContainerLowLight = Color(0xFFF7F6F1)
-val surfaceContainerLight = Color(0xFFF0EFE8)
-val surfaceContainerHighLight = Color(0xFFE8E7E0)
-val surfaceContainerHighestLight = Color(0xFFDDDCD5)
-val inverseSurfaceLight = Color(0xFF1E1B4B)
+val surfaceContainerLowLight = Color(0xFFFAFAFA)
+val surfaceContainerLight = Color(0xFFF5F5F5)
+val surfaceContainerHighLight = Color(0xFFEFEFEF)
+val surfaceContainerHighestLight = Color(0xFFE5E5E5)
+val inverseSurfaceLight = Color(0xFF1A1A1A)
 val inverseOnSurfaceLight = Color(0xFFFFFFFF)
 val outlineLight = Color(0xFF9CA3AF)
 val outlineVariantLight = Color(0xFFE5E7EB)

@@ -59,15 +59,14 @@ class LlmChatTask @Inject constructor() : CustomTask {
   override val task: Task =
     Task(
       id = BuiltInTaskId.LLM_CHAT,
-      label = "AI Chat",
+      label = "Ivy Edge Tutor",
       category = Category.LLM,
       icon = Icons.Outlined.Forum,
       models = mutableListOf(),
-      description = "Chat with on-device large language models",
-      shortDescription = "Chat with an on-device LLM",
-      docUrl = "https://github.com/google-ai-edge/LiteRT-LM/blob/main/kotlin/README.md",
-      sourceCodeUrl =
-        "https://github.com/google-ai-edge/gallery/blob/main/Android/src/app/src/main/java/com/google/ai/edge/gallery/ui/llmchat/LlmChatModelHelper.kt",
+      description = "Chat with Ivy, your on-device AI tutor",
+      shortDescription = "Learn with Ivy offline",
+      docUrl = "",
+      sourceCodeUrl = "",
       textInputPlaceHolderRes = R.string.text_input_placeholder_llm_chat,
     )
 
@@ -188,11 +187,11 @@ class LlmAskImageTask @Inject constructor() : CustomTask {
   }
 }
 
-@Module
-@InstallIn(SingletonComponent::class) // Or another component that fits your scope
+// @Module
+// @InstallIn(SingletonComponent::class) // Or another component that fits your scope
 internal object LlmAskImageModule {
-  @Provides
-  @IntoSet
+  // @Provides
+  // @IntoSet
   fun provideTask(): CustomTask {
     return LlmAskImageTask()
   }
@@ -253,11 +252,11 @@ class LlmAskAudioTask @Inject constructor() : CustomTask {
   }
 }
 
-@Module
-@InstallIn(SingletonComponent::class) // Or another component that fits your scope
+// @Module
+// @InstallIn(SingletonComponent::class) // Or another component that fits your scope
 internal object LlmAskAudioModule {
-  @Provides
-  @IntoSet
+  // @Provides
+  // @IntoSet
   fun provideTask(): CustomTask {
     return LlmAskAudioTask()
   }

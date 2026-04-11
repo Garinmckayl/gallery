@@ -662,22 +662,7 @@ private fun IntroText(enableAnimation: Boolean, gm4: Boolean) {
     }
 
   val introText = buildAnnotatedString {
-    val gemma4Url = "https://ai.google.dev/gemma"
-    if (gm4) {
-      append("Discover the power of on-device AI models from the ")
-      append(buildTrackableUrlAnnotatedString(url = litertUrl, linkText = "LiteRT community"))
-      append(", featuring the all-new ")
-      append(buildTrackableUrlAnnotatedString(url = gemma4Url, linkText = "Gemma 4"))
-      append(".")
-    } else {
-      append("${stringResource(R.string.app_intro)} ")
-      append(
-        buildTrackableUrlAnnotatedString(
-          url = litertUrl,
-          linkText = stringResource(R.string.litert_community_label),
-        )
-      )
-    }
+    append("Your offline AI tutor for Ethiopian students. Download a model below to start learning — no internet needed after download.")
   }
   Text(
     introText,
