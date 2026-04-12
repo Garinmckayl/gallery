@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * llama.cpp backend for GGUF models (Bonsai 1-bit family).
@@ -51,7 +52,7 @@ object LlamaCppModelHelper : LlmModelHelper {
         smolLM.load(
           modelPath = modelPath,
           params = SmolLM.InferenceParams(
-            contextSize = 1024,
+            contextSize = 2048,
             temperature = model.getFloatConfigValue(ConfigKeys.TEMPERATURE, 0.7f),
             minP = 0.1f,
             useMmap = true,
@@ -124,19 +125,29 @@ object LlamaCppModelHelper : LlmModelHelper {
     val scope = coroutineScope ?: CoroutineScope(Dispatchers.IO)
     currentJob = scope.launch {
       try {
-        val prompt = "[Instruction: You are Ivy, an AI tutor for Ethiopian students. Respond in English. Use the Socratic method: ask guiding questions. Be warm. Keep responses to 2-3 sentences.]\n\nStudent: $input\n\nIvy:"
+        val prompt = "/no_think\n[Instruction: You are Ivy, an AI tutor for Ethiopian students. Respond in English. For math/physics, show clear step-by-step work with equations. Be warm and encouraging.]\n\nStudent: $input\n\nIvy:"
+        var inThinkBlock = false
         smolLM.getResponseAsFlow(prompt).collect { token ->
-          launch(Dispatchers.Main) {
-            resultListener(token, false, null)
+          // Filter out <think>...</think> blocks from reasoning models
+          val text = token
+          if ("<think>" in text) { inThinkBlock = true; return@collect }
+          if ("</think>" in text) { inThinkBlock = false; return@collect }
+          if (inThinkBlock) return@collect
+          // Also skip if token is just the think tags
+          val clean = text.replace("<think>", "").replace("</think>", "").replace("/no_think", "")
+          if (clean.isNotEmpty()) {
+            withContext(Dispatchers.Main) {
+              resultListener(clean, false, null)
+            }
           }
         }
-        launch(Dispatchers.Main) {
+        withContext(Dispatchers.Main) {
           resultListener("", true, null)
           cleanUpListener()
         }
       } catch (e: Exception) {
         Log.e(TAG, "Inference error", e)
-        launch(Dispatchers.Main) {
+        withContext(Dispatchers.Main) {
           onError(e.message ?: "Inference failed")
           cleanUpListener()
         }
