@@ -268,7 +268,8 @@ fun DownloadAndTryButton(
             "Model '${model.name}' is from HuggingFace. Checking if the url needs auth to download",
           )
           val firstResponseCode = modelManagerViewModel.getModelUrlResponse(model = model)
-          if (firstResponseCode == HttpURLConnection.HTTP_OK) {
+          // 200 = OK, 302 = redirect to CDN (also OK for public repos like Bonsai)
+          if (firstResponseCode == HttpURLConnection.HTTP_OK || firstResponseCode == HttpURLConnection.HTTP_MOVED_TEMP || firstResponseCode == 307) {
             Log.d(TAG, "Model '${model.name}' doesn't need auth. Start downloading the model...")
             withContext(Dispatchers.Main) { startDownload(null) }
             return@launch

@@ -83,13 +83,13 @@ private const val TEST_MODEL_ALLOW_LIST = """
 {
   "models": [
     {
-      "name": "Ivy Model 1.7B (Bonsai 1-bit)",
-      "modelId": "prism-ml/Bonsai-1.7B-gguf",
-      "modelFile": "Bonsai-1.7B.gguf",
+      "name": "Qwen3.5 4B (Recommended)",
+      "modelId": "unsloth/Qwen3.5-4B-GGUF",
+      "modelFile": "Qwen3.5-4B-Q4_K_M.gguf",
       "commitHash": "main",
-      "description": "PrismML Bonsai 1.7B with true 1-bit quantization. Only 237 MB download. Runs on ultra-budget phones with 1.5 GB+ RAM.",
-      "sizeInBytes": 248512512,
-      "minDeviceMemoryInGb": 2,
+      "description": "Latest Qwen 3.5 with strong reasoning and math. Best for tutoring. 2.6 GB download, needs 4 GB+ RAM.",
+      "sizeInBytes": 2740000000,
+      "minDeviceMemoryInGb": 4,
       "runtimeType": "llama_cpp",
       "defaultConfig": {
         "topK": 40,
@@ -105,10 +105,10 @@ private const val TEST_MODEL_ALLOW_LIST = """
       "name": "Gemma3-1B-IT",
       "modelId": "litert-community/Gemma3-1B-IT",
       "modelFile": "gemma3-1b-it-int4.litertlm",
-      "description": "Google Gemma 3 1B with 4-bit quantization via LiteRT. 557 MB download, needs 2 GB+ RAM.",
+      "commitHash": "42d538a932e8d5b12e6b3b455f5572560bd60b2c",
+      "description": "Google Gemma 3 1B via LiteRT. 557 MB download, needs 2 GB+ RAM.",
       "sizeInBytes": 584417280,
       "minDeviceMemoryInGb": 2,
-      "commitHash": "42d538a932e8d5b12e6b3b455f5572560bd60b2c",
       "defaultConfig": {
         "topK": 64,
         "topP": 0.95,
@@ -118,6 +118,25 @@ private const val TEST_MODEL_ALLOW_LIST = """
       },
       "taskTypes": ["llm_chat", "llm_prompt_lab"],
       "bestForTaskTypes": ["llm_chat", "llm_prompt_lab"]
+    },
+    {
+      "name": "Ivy Model 1.7B (Bonsai 1-bit)",
+      "modelId": "prism-ml/Bonsai-1.7B-gguf",
+      "modelFile": "Bonsai-1.7B.gguf",
+      "commitHash": "main",
+      "description": "PrismML Bonsai 1.7B with true 1-bit quantization. Only 237 MB. For ultra-budget phones with 1.5 GB+ RAM.",
+      "sizeInBytes": 248512512,
+      "minDeviceMemoryInGb": 2,
+      "runtimeType": "llama_cpp",
+      "defaultConfig": {
+        "topK": 40,
+        "topP": 0.95,
+        "temperature": 0.7,
+        "maxTokens": 1024,
+        "accelerators": "cpu"
+      },
+      "taskTypes": ["llm_chat", "llm_prompt_lab"],
+      "bestForTaskTypes": ["llm_chat"]
     }
   ]
 }
@@ -586,12 +605,15 @@ constructor(
     try {
       val url = URL(model.url)
       val connection = url.openConnection() as HttpURLConnection
+      // Don't follow redirects — we just want to check if the URL is accessible
+      connection.instanceFollowRedirects = false
+      connection.requestMethod = "HEAD"
+      connection.connectTimeout = 10000
+      connection.readTimeout = 10000
       if (accessToken != null) {
         connection.setRequestProperty("Authorization", "Bearer $accessToken")
       }
       connection.connect()
-
-      // Report the result.
       return connection.responseCode
     } catch (e: Exception) {
       Log.e(TAG, "$e")
